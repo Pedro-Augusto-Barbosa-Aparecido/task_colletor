@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "task-colletor"
+version = "0.1.0"
+description = ""
+authors = ["Pedro Augusto Barbosa Aparecido <pedr.augustobarbosa.aparecido@gmail.com>"]
+readme = "README.md"
+packages = [{include = "task_colletor"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
