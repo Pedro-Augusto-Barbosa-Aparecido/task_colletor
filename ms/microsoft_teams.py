@@ -4,6 +4,7 @@ from selenium.webdriver import Chrome
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+from utils.iframe_mgt import IFrameManagement
 from utils.waiter import Wait
 
 
@@ -13,6 +14,7 @@ class MicrosoftTeams:
     def __init__(self, email: str, password: str):
         self.browser = Chrome()
         self.wait_time = Wait(self.browser)
+        self.iframe_mgt = IFrameManagement(self.browser)
 
         self.email = email
         self.password = password
@@ -55,16 +57,29 @@ class MicrosoftTeams:
         time.sleep(10)  # wait a teams load content
 
     def get_home_works_todo(self):
-        pass
+        self.iframe_mgt.go_out_iframe()
 
     def get_home_works_pending(self):
-        pass
+        self.iframe_mgt.go_out_iframe()
 
     def get_home_works_completed(self):
+        self.iframe_mgt.go_out_iframe()
+
+    def _check_if_has_home_works(self):
         pass
 
+    def _move_to_assignment_screen(self):
+        self.wait_time.click_when_element_is_visible(
+            "#teams-app-bar > ul > li:nth-child(4) button",
+            wait_strategy="long"
+        )
+
+        self.iframe_mgt.enter_in_iframe(
+            "/html/body/app-caching-container/div/div/extension-tab/div/embedded-page-container/div/iframe"
+        )
+
     def _click_on_submit(self):
-        self.browser.find_element(By.CSS_SELECTOR, "input[type=submit]").click()
+        self.wait_time.click_when_element_is_visible("input[type=submit]", by=By.CSS_SELECTOR)
 
     def _wait_school_banner(self):
         self.wait_time.long.until(
