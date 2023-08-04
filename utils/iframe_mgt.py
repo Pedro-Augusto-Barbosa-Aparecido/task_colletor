@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 class IFrameManagement(Wait):
     def __init__(self, browser: WebDriver):
-        super(IFrameManagement).__init__(browser)
+        super(IFrameManagement, self).__init__(browser)
 
     def enter_in_iframe(self, iframe_xpath: str):
         iframe = self.wait_element_is_visible(

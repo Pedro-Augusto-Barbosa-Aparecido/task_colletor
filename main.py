@@ -12,7 +12,9 @@ except CredentialNotFound:
     user = UserManagement.set_user_management(email, password)
 
 
-MicrosoftTeams(
+microsoft_teams = MicrosoftTeams(
     email=user.email,
     password=user.password
 )
+
+microsoft_teams.get_home_works_todo()

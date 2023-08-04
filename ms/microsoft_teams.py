@@ -57,12 +57,29 @@ class MicrosoftTeams:
         time.sleep(10)  # wait a teams load content
 
     def get_home_works_todo(self):
+        self._move_to_assignment_screen()
+
+        try:
+            self.wait_time.wait_element_is_visible(
+                '//*[@id="root"]/div/div/div/div/div/div[2]',
+                by=By.XPATH,
+                wait_strategy="long",
+            )
+
+            print("Não tem tarefa para fazer!")
+        except Exception:
+            pass
+
         self.iframe_mgt.go_out_iframe()
 
     def get_home_works_pending(self):
+        self._move_to_assignment_screen()
+
         self.iframe_mgt.go_out_iframe()
 
     def get_home_works_completed(self):
+        self._move_to_assignment_screen()
+
         self.iframe_mgt.go_out_iframe()
 
     def _check_if_has_home_works(self):
